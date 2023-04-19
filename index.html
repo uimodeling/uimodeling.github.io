@@ -1,0 +1,983 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZWTD5V0L2H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        // gtag('config', 'G-ZWTD5V0L2H');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="description" content="WebUI: A Dataset for Enhancing Visual UI Understanding with Web Semantics">
+    <link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WebUI: A Dataset for Enhancing Visual UI Understanding with Web Semantics</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="static/favicon.png">
+    <!-- <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png"> -->
+    <link rel="manifest" href="site.webmanifest">
+
+    <meta name="theme-color" content="#f5ece5">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#276FBF">
+    <meta name="msapplication-TileColor" content="#276FBF">
+    <link rel="stylesheet" href="fonts.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.1/dist/js/splide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-intersection@0.2.0/dist/js/splide-extension-intersection.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.1/dist/css/splide.min.css">
+
+    <style>
+        .material-symbols-rounded {
+            font-variation-settings: 'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 48
+        }
+
+
+        @font-face {
+            font-family: 'Code';
+            /* src: url('/fonts/IBMPlexMono-Light.ttf'); */
+            src: url('fonts/SourceSansPro-Regular.ttf');
+        }
+
+        .tooltip-inner {
+            /* font-family: 'GT Ultra', sans-serif !important; */
+            font-family: 'Source Sans Pro', sans-serif !important;
+        }
+
+
+        h3 span i, h5 span i {
+            order: -1;
+        }
+
+        body {
+            position: relative;
+        }
+
+        html, body {
+            /* font-family: 'GT Ultra', sans-serif !important; */
+            font-family: 'Source Sans Pro', sans-serif !important;
+            font-weight: 200;
+            font-size: 20px;
+            overflow-x: hidden;
+            box-sizing: border-box;
+            color: #1f1e1d;
+            background-color: #e5f5f0;
+
+            /*     background-color: #1f1e1d;*/
+            /*color: #d7c0af;*/
+            /*font-family: sans-serif;*/
+        }
+
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
+        header {
+            text-align: center;
+        }
+
+        a {
+            color: #6522c2ec !important;
+            text-decoration: none;
+            font-weight: 300;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #184477 !important;
+            /*font-weight: 700;*/
+        }
+
+        /* Heart beat animation */
+
+
+        .heart:hover div * {
+            color: #B33951 !important;
+            cursor: initial !important;
+        }
+
+        .authors {
+            display: flex;
+            justify-content: center;
+            max-width: 850px;
+            flex-wrap: wrap;
+            margin: 0 auto;
+            font-size: 1.1em;
+            
+        }
+
+        .autoplaytoggle {
+            margin: -1rem;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .autoplaytoggle button {
+            align-items: center;
+        }
+
+        .autoplaytoggle span.material-symbols-rounded {
+
+            font-size: 1.25rem !important;
+        }
+
+        .insts {
+            display: flex;
+            justify-content: center;
+        }
+
+        header h1 {
+            margin-bottom: 0;
+            font-weight: 700;
+        }
+
+        .carousel-item img {
+            max-width: 100%;
+        }
+
+        .insts {
+            font-size: 17px;
+        }
+
+        .linkscontainer {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .links {
+            /*font-size: 5rem;*/
+            /*margin: 0 -20px;*/
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .links a span.material-symbols-rounded {
+            max-width: 25px;
+        }
+
+        span.material-symbols-rounded {
+            max-width: 25px;
+        }
+
+        .links a {
+            display: inline-flex;
+            /*flex-direction: column;*/
+            align-items: center;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 5px 7px;
+            color: #f6f3f1 !important;
+            /* font-family: 'GT Ultra', sans-serif !important; */
+            font-family: 'Source Sans Pro', sans-serif !important;
+            font-weight: 400;
+            /*margin: 0 10px;*/
+            transition: transform .2s;
+            background-color: rgba(var(--btn-bgc), 1);
+        }
+
+
+        .links a:nth-child(1) {
+            /* --btn-bgc: 237, 100, 90; */
+            --btn-bgc: 237,167,201;
+        }
+
+        .links a:hover {
+            transform: scale(1.2);
+            color: #f6f3f1 !important;
+        }
+
+        .links a:active {
+            transform: scale(1.3);
+        }
+
+        .links a:nth-child(2) {
+            /* --btn-bgc: 47, 138, 196; */
+            --btn-bgc: 123,146,220;
+            
+        }
+
+        .links a:nth-child(3) {
+            /* --btn-bgc: 229, 134, 6; */
+            /* --btn-bgc: 245,206,90; */
+            --btn-bgc: 235,194,12;
+        }
+
+        .links a:nth-child(4) {
+            /* --btn-bgc: 133, 180, 51; */
+            --btn-bgc: 227,90,67;
+        }
+
+        .links a:nth-child(5) {
+            /* --btn-bgc: 204, 97, 176; */
+            --btn-bgc: 79,49,45;
+        }
+
+        .links a span.material-symbols-rounded {
+            margin-right: .25rem;
+        }
+
+        .links a:not(:last-child) {
+            /*margin-right: 20px;*/
+        }
+
+
+        .links .material-symbols-rounded {
+            font-size: 1.25rem;
+        }
+
+
+        .links i {
+            font-size: 28px;
+        }
+
+        .fig {
+            width: 100%;
+            display: block;
+            padding: 0 10px;
+            margin: 0 auto;
+        }
+
+        img.arch {
+            max-width: 500px;
+        }
+
+        img.blobs {
+            max-width: 350px;
+        }
+
+        .teaser {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .teaser + section {
+            margin-top: 1rem;
+        }
+
+        .teaser video {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        img.teaser {
+            max-width: 90%;
+        }
+
+        .abstract-imgs .col {
+            display: flex;
+            align-items: center;
+        }
+
+        .videowrapper {
+            float: none;
+            clear: both;
+            width: 100%;
+            position: relative;
+            padding-bottom: 56.25%;
+            padding-top: 25px;
+            height: 0;
+        }
+
+        .wrapwrap {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .videowrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .abstract-capt {
+            font-size: 0.8rem;
+            display: block !important;
+            text-align: center;
+        }
+
+        .latex {
+            display: inline;
+            font-family: 'Math', monospace;
+            font-style: italic;
+        }
+
+        p {
+            margin: 0 !important;
+        }
+
+        .bs-tooltip-end {
+            margin-left: 3px !important;
+        }
+
+        section {
+            margin: 2rem 0;
+            text-align: justify;
+            word-break: keep-all;
+        }
+
+        section h5 {
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        .iconbutton {
+            padding: 0.1rem 0.3rem;
+            display: flex;
+            border: none !important;
+            background-color: #4B495B !important;
+            color: #f5ece5 !important;
+            /* font-family: 'GT Ultra', sans-serif !important; */
+            font-family: 'Source Sans Pro', sans-serif !important;
+            font-weight: 400;
+            text-decoration: none !important;
+        }
+
+        .iconbutton span.material-symbols-rounded {
+            font-size: 1.5rem;
+            /* font-weight: 700; */
+        }
+
+        .playpause span.material-symbols-rounded {
+            font-variation-settings: 'wght' 700;
+
+
+        }
+
+        .iconbutton span.material-symbols-rounded:hover {
+            color: #faf6f2 !important;
+        }
+
+        .iconbutton:hover, .iconbutton:focus {
+            background-color: #2E2E38 !important;
+            border-color: none !important;
+            color: #faf6f2 !important;
+        }
+
+        .iconbutton:focus {
+
+        }
+
+        .iconbutton:active {
+            background-color: #09090B !important;
+
+        }
+
+        [data-clipboard-target] {
+            cursor: pointer;
+        }
+
+        [data-clipboard-target]:hover {
+            color: #276FBF !important;
+        }
+
+        /* .emptyrooms {
+             max-width: 80%;
+         }*/
+
+        .emptyrooms {
+            display: flex;
+            /*justify-content: center;*/
+            align-items: flex-start;
+            background-color: #f5ece5;
+        }
+
+        .playpause {
+            flex-shrink: 0;
+        }
+
+        .emptyrooms img:first-child {
+            width: 16.196944%;
+            margin-right: 0.6%;
+        }
+
+        .emptyrooms img:last-child {
+            width: 82.8862479%;
+        }
+
+
+        section h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        section h5, section h3 {
+            justify-content: space-between;
+
+            display: flex;
+            align-items: center;
+        }
+
+        h3, h5 {
+            scroll-margin-top: 25px;
+            /*display: inline-block;*/
+        }
+
+        h3[data-exclude-link], h5[data-exclude-link] {
+            cursor: initial;
+        }
+
+        h3 span, h5 span {
+            display: inline-flex;
+            align-items: center;
+            /* cursor: pointer; */
+        }
+
+        /* h3 span:hover, h5 span:hover {
+
+            color: #276FBF !important;
+        } */
+
+        /*
+                h3[data-exclude-link]:hover, h5[data-exclude-link]:hover {
+                    color: initial !important;
+                }*/
+
+        .carousel {
+            margin: 1rem 0;
+        }
+
+        .ltx {
+            vertical-align: baseline;
+        }
+
+        .cit {
+            background-color: rgba(26, 25, 31, 0.05);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 18px;
+            display: inline-block;
+            margin: 0 auto;
+            overflow-y: hidden;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Source Sans Pro', monospace;
+        }
+
+        .cit_cont {
+            display: flex;
+        }
+
+        .video-container {
+            position: relative;
+        }
+
+        /* .video-container .video-border {
+             position: absolute;
+             width: 100%;
+             height: 100%;
+             top: 0;
+             left: 0;
+             box-shadow: inset 0px 0px 0px 6px #f5ece5;
+         }*/
+
+        .video-container video {
+            width: 100%;
+            display: block;
+            clip-path: inset(5px 5px);
+        }
+
+        .video-container img {
+            width: 100%;
+        }
+
+        .splide > * {
+            font-weight: 500;
+            position: initial;
+        }
+
+        .splide__arrow {
+            position: initial;
+            background: none;
+            /*opacity: 1;*/
+            -webkit-transform: none;
+            -moz-transform: none;
+            -ms-transform: none;
+            -o-transform: none;
+            transform: none;
+            font-size: 1.25rem;
+            justify-content: end;
+            width: 1.5em;
+        }
+
+        .splide__arrow--prev {
+            justify-content: left;
+        }
+
+        .splide__slide {
+            height: 0;
+        }
+
+        .splide__slide.is-visible {
+            height: auto;
+        }
+
+        .move-cont {
+            display: flex;
+        }
+
+        .move-cont > video {
+            max-width: 100%;
+        }
+
+        .splide__pagination__page.is-active {
+            background: #000;
+        }
+
+        .splide__pagination__page {
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            -ms-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+        .splide__pagination {
+            margin-top: 0.25rem;
+        }
+
+        .splide__pagination__page:hover {
+            background: #aaa;
+            transform: scale(1.2);
+        }
+
+        .splide__track_and_arrows {
+            display: flex;
+        }
+
+        .splide__arrows {
+            display: flex;
+            align-items: center;
+        }
+
+        .styletransfer {
+            display: grid;
+            grid-row-gap: .5rem;
+            grid-template-columns: 1fr 20px 1fr 1fr 1fr 20px 1fr 1fr 1fr;
+        }
+
+        .inversion {
+            display: grid;
+            /*grid-row-gap: .5rem;*/
+            /*grid-template-columns: 1fr 20px 1fr 1fr 1fr 20px 1fr 1fr 1fr;*/
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        }
+
+        .styletransfer img {
+            max-width: 100%;
+            clip-path: inset(2px 2px);
+        }
+
+        .inversion span {
+            text-align: center;
+        }
+
+        .inversion img {
+            max-width: 100%;
+            clip-path: inset(2px 2px);
+        }
+
+
+        #inversion ~ .splide img {
+            max-width: 100%;
+            padding: 0.3rem;
+        }
+
+        .styletransfer span {
+            text-align: center;
+        }
+
+        .styletransfer span:nth-child(2) {
+            grid-column-start: 3;
+            grid-column-end: 6;
+        }
+
+        .styletransfer span:nth-child(3) {
+            grid-column-start: 7;
+            grid-column-end: 10;
+        }
+
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 1050px;
+            }
+        }
+
+        .inversion_subheader {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .inversion_subheader:not(:first-of-type) {
+            margin-top: 0.2rem;
+        }
+
+        .inversion_subheader + .splide {
+            margin: 0.2rem 0 !important;
+        }
+
+        /*
+                .move-cont .video-container:nth-child(8), .move-cont .video-container:nth-child(7) {
+                    display: none;
+                }*/
+
+        @media (max-width: 991px) {
+            /*
+                        .move-cont .video-container:nth-child(5), .move-cont .video-container:nth-child(6) {
+                            display: none;
+                        }*/
+            .move-cont > video {
+                max-width: 150%;
+                clip-path: inset(0 33.333333% 0 0);
+            }
+
+            header h3 {
+                font-size: 1.5rem;
+            }
+
+            .cit {
+                /*font-size: 12px !important;*/
+            }
+
+            .emptyrooms img:last-child {
+                width: 99.6% !important;
+            }
+
+            .emptyrooms img:first-child {
+                width: 19.46% !important;
+                margin-right: 0.7522% !important;
+            }
+
+            .styletransfer {
+                display: grid;
+                grid-template-columns: 1fr 15px 1fr 1fr 15px 1fr 1fr !important;
+            }
+
+            .styletransfer img:nth-child(9n+3), .styletransfer img:nth-child(9n-1) {
+                display: none;
+            }
+
+            .styletransfer span:nth-child(2) {
+                grid-column-start: 3;
+                grid-column-end: 5;
+            }
+
+            .styletransfer span:nth-child(3) {
+                grid-column-start: 6;
+                grid-column-end: 8;
+            }
+        }
+
+        .author {
+            padding: 0 0.6rem;
+        }
+
+        @media (max-width: 767px) {
+            html, body {
+
+                /*font-size: 16px;*/
+            }
+
+            .author {
+                font-size: 18px;
+            }
+
+            .insts {
+                font-size: 16px;
+            }
+
+            /*.move-cont .video-container:nth-child(4) {
+                display: none;
+            }*/
+            .move-cont > video {
+                max-width: 200%;
+                clip-path: inset(0 50% 0 0);
+            }
+
+            .inversion *:nth-child(5n+2) {
+                display: none;
+            }
+
+            .inversion {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+
+            .emptyrooms img:last-child {
+                width: 124.477307% !important;
+            }
+
+            .emptyrooms img:first-child {
+                width: 24.3243243% !important;
+                margin-right: 0.9% !important;
+            }
+
+            .styletransfer {
+                display: grid;
+                grid-template-columns: 1fr 10px 1fr 10px 1fr !important;
+            }
+
+            .styletransfer img:nth-child(9n+2), .styletransfer img:nth-child(9n-2) {
+                display: none;
+            }
+
+            .styletransfer span:nth-child(2) {
+                grid-column-start: 3;
+                grid-column-end: 4;
+            }
+
+            .styletransfer span:nth-child(3) {
+                grid-column-start: 5;
+                grid-column-end: 6;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .links a span.material-symbols-rounded {
+                max-width: 20px;
+            }
+
+            .links {
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 510px) {
+            /*
+                        .move-cont .video-container:nth-child(3) {
+                            display: none;
+                        }*/
+            .move-cont > video {
+                max-width: 300%;
+                clip-path: inset(0 66.6666666% 0 0);
+            }
+
+
+            .inversion {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .inversion span:nth-child(n+4) {
+                grid-row: 3;
+            }
+
+            .links .material-symbols-rounded {
+                /*display: none;*/
+                font-size: 1rem;
+            }
+
+            .links a span.material-symbols-rounded {
+                max-width: 18px;
+            }
+
+        }
+
+        @media (max-width: 399px) {
+
+        }
+
+        @media (max-width: 380px) {
+            /*.links .material-symbols-rounded {*/
+            /*    display: none;*/
+            /*    padding: 5px 10px;*/
+            /*    !*font-size: 1rem;*!*/
+            /*}*/
+        }
+
+        @media (max-width: 575px) {
+
+            img.blobs {
+                max-width: 300px;
+            }
+
+            .emptyrooms img:last-child {
+                width: 165.941536% !important;
+            }
+
+            .emptyrooms img:first-child {
+                width: 32.4269205% !important;
+                margin-right: 1.15% !important;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .abstract-imgs .col-md-7 {
+                border-right: 1px solid #1f1e1d;
+            }
+
+            img.arch, img.blobs {
+                max-width: 600px;
+            }
+
+        }
+        .py-3{
+            padding-bottom: 0rem!important;
+        }
+        .mt-4 {
+            margin-top: 0rem!important;
+        }
+
+
+
+    </style>
+</head>
+<body class="h-100 d-flex flex-column">
+<main class="container flex-grow-1" style>
+    <header class="py-3">
+        
+        
+        <h2 class="mt-1 mt-sm-2 mt-md-3" style="font-weight: 300"><span style="font-weight: 900; margin-right: 3px;">WebUI:  </span>A Dataset for Enhancing Visual UI Understanding with Web Semantics</h2>
+        <div class="authors mt-3">
+            <div class="author"><a href="https://jasonwunix.com/">Jason Wu</a><sup>1</sup></div>
+            <div class="author"><a href="https://www.linkedin.com/in/carriesyw/">Siyan Wang</a><sup>2</sup></div>
+            <div class="author"><a href="https://programs.sigchi.org/chi/2023/authors/95199">Siman Shen</a><sup>3</sup></div>
+            <div class="author"><a href="https://www.yihaopeng.tw/">Yi-Hao Peng</a><sup>1</sup></div>
+            <div class="author"><a href="http://www.jeffreynichols.com/">Jeffrey Nichols</a><sup>4</sup></div>
+            <div class="author"><a href="https://www.cs.cmu.edu/~jbigham/">Jeffrey Bigham</a><sup>1</sup></div>
+        </div>
+        <div class="insts mt-1">
+            <div class="inst pe-3"><sup>1</sup>Carnegie Mellon University</div>
+            <div class="inst pe-3"><sup>2</sup>Wellesley College</div>
+            <div class="inst pe-3"><sup>3</sup>Grinnell College</div>
+            <div class="inst pe-3"><sup>4</sup>Snooty Bird LLC</div>
+        </div>
+        <div class="insts mt-1">
+            <b>ACM CHI 2023</b>
+        </div>
+        <section class="teaser mt-2">
+            <video src="static/webui_intro.mp4" alt="A short slide animation showing the overivew of WebUI." data-no-pause autoplay playsinline muted loop></video>
+        </section>
+        <div class="linkscontainer">
+            <div class="links mt-4">
+                <a href=""><span class="material-symbols-rounded">science</span><span>Dataset</span></a>
+                <a href=""><span class="material-symbols-rounded">sports_esports</span><span>Models</span></a>
+                <a href="https://github.com/js0nwu/webui" target="_blank"><span class="material-symbols-rounded">code</span><span>Scripts</span></a>
+                <a href="https://arxiv.org/abs/2301.13280" target="_blank"><span class="material-symbols-rounded">description</span><span>Paper</span></a>
+                <a href=""><span class="material-symbols-rounded">format_quote</span><span>Talk</span></a>
+            </div>
+        </div>
+    </header>
+    <!-- <section class="teaser mt-2">
+        <video src="static/webui_intro.mp4" alt="A short slide animation showing the overivew of WebUI." data-no-pause autoplay playsinline muted loop></video>
+    </section> -->
+    
+    <!-- <section>
+        <h3 data-exclude-link><span>Video</span>
+            <div>
+                <a href="static/blobgan_slides.pptx" target="_blank" class="btn px-2 py-1 iconbutton btn-dark"><span class="me-1 material-symbols-rounded">file_download</span> Slides</a>
+            </div>
+        </h3>
+        <div class="wrapwrap">
+            <div class="videowrapper">
+                <iframe width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section> -->
+    
+    <section class="abstract">
+        <h3 data-exclude-link><span><span class="me-2 material-symbols-rounded"> palette </span>Abstract</span></h3>
+        <p>
+            Modeling user interfaces (UIs) from visual information allows systems to make inferences about the functionality and semantics needed to support use cases in accessibility, app automation, and testing. 
+            Current datasets for training machine learning models are limited in size due to the costly and time-consuming process of manually collecting and annotating UIs. 
+            We crawled the web to construct WebUI, a large dataset of 400,000 rendered web pages associated with automatically extracted metadata. 
+            We analyze the composition of WebUI and show that while automatically extracted data is noisy, most examples meet basic criteria for visual UI modeling. 
+            We applied several strategies for incorporating semantics found in web pages to increase the performance of visual UI understanding models in the mobile domain, where less labeled data is available: (i) element detection, (ii) screen classification and (iii) screen similarity.
+        </p>
+
+    </section>
+
+
+
+    <section class="dataset">
+        <h3 data-exclude-link><span><span class="me-2 material-symbols-rounded"> smart_toy </span>Data Collection</span></h3>
+        <p>
+             We implemented a parallelizable cloud-based web crawler to collect WebUI dataset, consisting of a crawling coordinator server, a pool of crawler workers, and a database service. 
+             The crawler worker used a headless framework to interface with the Chrome browser and employed heuristics to dismiss certain popups. 
+             The crawling policy encouraged diverse exploration, with the coordinator organizing upcoming URLs by hostname and selecting them using assigned probabilities. 
+             The crawler workers visited web pages using multiple simulated devices, capturing viewport and full-page screenshots, as well as accessibility trees, layout, and computed style information.
+        </p>
+
+    </section>
+
+    <section class="dataset">
+        <h3 data-exclude-link><span><span class="me-2 material-symbols-rounded"> dataset </span>Dataset Overview</span></h3>
+        <p>
+            The WebUI dataset contains 400K web UIs captured over a period of 3 months and cost about $500 to crawl. 
+            We grouped web pages together by their domain name, then generated training (70%), validation (10%), and testing (20%) splits. 
+            This ensured that similar pages from the same website must appear in the same split. 
+            We created four versions of the training dataset. Three of these splits were generated by randomly sampling a subset of the training split: Web-7k, Web-70k, Web-350k. 
+            We chose 70k as a baseline size, since it is approximately the size of existing UI datasets. 
+            We also generated an additional split (Web-7k-Resampled) to provide a small, higher quality split for experimentation. 
+            Web-7k-Resampled was generated using a class-balancing sampling technique, and we removed screens with possible visual defects (e.g., very small, occluded, or invisible elements). 
+            The validation and test split was always kept the same.
+        </p>
+
+    </section>
+    
+ 
+        
+        
+        
+        
+        
+        
+        
+        
+    </section>
+    <section id="citation">
+        <h3 data-exclude-link><span><span class="me-1 material-symbols-rounded">quick_reference_all</span>Reference</span>
+            <!-- <div>
+                <a href="static/blobgan_paper.pdf" target="_blank" class="btn px-2 py-1 iconbutton btn-dark"><span class="me-1 material-symbols-rounded">file_download</span> Paper PDF</a>
+            </div> -->
+        </h3>
+        <div class="cit_cont">
+        <pre class="cit">@article{wu2023webui, 
+    title={WebUI: A Dataset for Enhancing Visual UI Understanding with Web Semantics}, 
+    author={Jason Wu and Siyan Wang and Siman Shen and Yi-Hao Peng and Jeffrey Nichols and Jeffrey Bigham}, 
+    journal={ACM Conference on Human Factors in Computing Systems (CHI)}, 
+    year={2023}
+}</pre>
+        </div>
+    </section>
+    <section>
+        <h3 data-exclude-link>
+            <div><span data-text="volunteer_activism" class=" me-2 material-symbols-rounded">partner_exchange
+</span><span data-text="Acknowledgements">Acknowledgements</span>
+            </div>
+        </h3>
+        <p>
+            This work was funded in part by an NSF Graduate Research Fellowship.
+        </p>
+    </section>
+</main>
+
+
+
+</body>
+</html>
