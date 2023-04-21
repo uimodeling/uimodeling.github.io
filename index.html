@@ -7,15 +7,12 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZWTD5V0L2H"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-
         function gtag() {
             dataLayer.push(arguments);
         }
-
         gtag('js', new Date());
-
-        // gtag('config', 'G-ZWTD5V0L2H');
     </script>
+    
     <meta charset="UTF-8">
     <meta name="description" content="WebUI: A Dataset for Enhancing Visual UI Understanding with Web Semantics">
     <link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -40,7 +37,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.1/dist/js/splide.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-intersection@0.2.0/dist/js/splide-extension-intersection.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.1/dist/css/splide.min.css">
-
+    <!-- <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/3.27.0/gradio.js"></script> -->
     <style>
         .material-symbols-rounded {
             font-variation-settings: 'FILL' 1,
@@ -875,11 +872,11 @@
         </section>
         <div class="linkscontainer">
             <div class="links mt-4">
-                <a href=""><span class="material-symbols-rounded">science</span><span>Dataset</span></a>
-                <a href=""><span class="material-symbols-rounded">sports_esports</span><span>Models</span></a>
+                <a href="https://huggingface.co/datasets?search=biglab/webui" target="_blank"><span class="material-symbols-rounded">science</span><span>Dataset</span></a>
+                <a href="https://huggingface.co/models?search=biglab/webui" target="_blank"><span class="material-symbols-rounded">sports_esports</span><span>Models</span></a>
                 <a href="https://github.com/js0nwu/webui" target="_blank"><span class="material-symbols-rounded">code</span><span>Scripts</span></a>
                 <a href="https://arxiv.org/abs/2301.13280" target="_blank"><span class="material-symbols-rounded">description</span><span>Paper</span></a>
-                <a href=""><span class="material-symbols-rounded">format_quote</span><span>Talk</span></a>
+                <a href="https://www.youtube.com/watch?v=ibatG1TfLfM" target="_blank"><span class="material-symbols-rounded">format_quote</span><span>Talk</span></a>
             </div>
         </div>
     </header>
@@ -907,7 +904,8 @@
             Current datasets for training machine learning models are limited in size due to the costly and time-consuming process of manually collecting and annotating UIs. 
             We crawled the web to construct WebUI, a large dataset of 400,000 rendered web pages associated with automatically extracted metadata. 
             We analyze the composition of WebUI and show that while automatically extracted data is noisy, most examples meet basic criteria for visual UI modeling. 
-            We applied several strategies for incorporating semantics found in web pages to increase the performance of visual UI understanding models in the mobile domain, where less labeled data is available: (i) element detection, (ii) screen classification and (iii) screen similarity.
+            We applied several strategies for incorporating semantics found in web pages to increase the performance of visual UI understanding models in the mobile domain, where less labeled data is available: 
+            (1) element detection, (2) screen classification and (3) screen similarity.
         </p>
 
     </section>
@@ -917,10 +915,20 @@
     <section class="dataset">
         <h3 data-exclude-link><span><span class="me-2 material-symbols-rounded"> smart_toy </span>Data Collection</span></h3>
         <p>
-             We implemented a parallelizable cloud-based web crawler to collect WebUI dataset, consisting of a crawling coordinator server, a pool of crawler workers, and a database service. 
+             We implemented a parallelizable cloud-based web crawler to collect our dataset, consisting of a crawling coordinator server, a pool of crawler workers, and a database service. 
              The crawler worker used a headless framework to interface with the Chrome browser and employed heuristics to dismiss certain popups. 
              The crawling policy encouraged diverse exploration, with the coordinator organizing upcoming URLs by hostname and selecting them using assigned probabilities. 
-             The crawler workers visited web pages using multiple simulated devices, capturing viewport and full-page screenshots, as well as accessibility trees, layout, and computed style information.
+             The crawler workers visited web pages using <i>multiple simulated devices</i>, <i>capturing viewport</i> and <i>full-page screenshots</i>, as well as some other web semantic data including: 
+             <ul>
+                <li><i>Accessibility trees</i>: The accessibility tree is a tree-based representation of a web page that is shown to assistive technology, such as screen readers. 
+                    The tree contains accessibility objects, which usually correspond to UI elements and can be queried for properties (e.g., clickability, headings).
+                    Compared to the DOM tree, the accessibility tree is simplified by removing redundant nodes (e.g., div tags that are only used for styling) and automatically populated with semantic information via associated ARIA attributes or inferred from the node's content. </li>
+                <li><i>Layouts and computed styles</i>: For each element in the accessibility tree, we stored layout information from the rendering engine.
+                    Specifically, we retrieved 4 bounding boxes relevant to the "box model": (i) the content bounding box, (ii) the padding bounding box, (iii) the border bounding box, and (iv) the margin bounding box. 
+                    Each element was also associated with its computed style information, which included font size, background color and other CSS properties.</li>
+              </ul>
+              
+            
         </p>
 
     </section>
@@ -940,16 +948,78 @@
 
     </section>
     
- 
+    <section class="app1">
+        <h3 data-exclude-link><span><span class="me-2 material-symbols-rounded"> shelf_position </span>UI Modeling Use Case 1: Element Detection</span></h3>
         
+        <section class="teaser mt-2">
+            <img src="static/diagram_element_detection.png" alt="A short slide animation showing the overivew of WebUI."></image>
+        </section>
         
-        
-        
-        
-        
-        
-        
+        <p>
+            We applied inductive transfer learning to improve the performance of a element detection model. 
+            First, we pretrained the model on web pages to predict the location of nodes in the accessibility tree. 
+            Then, we used the weights of the web model to initialize the downstream model. 
+            Finally, we fine-tuned the downstream model on a smaller dataset consisting of mobile app screens
+        </p>
+
+        <br aria-hidden="true"/>
+
+
+        <iframe src="https://biglab-webui-screenrecognition.hf.space" frameborder="0" width="1000" height="1100"></iframe>
+
     </section>
+
+    <section class="app2">
+        <h3 data-exclude-link><span><span class="me-2 material-symbols-rounded"> hdr_strong </span>UI Modeling Use Case 2: Screen Classification</span></h3>
+        
+        <section class="teaser mt-2">
+            <img src="static/diagram_screen_classification.png" alt="A short slide animation showing the overivew of WebUI."></image>
+        </section>
+        
+        <p>
+            We applied semi-supervised learning to boost screen classification performance using unlabeled web data. 
+            First, a teacher classifier is trained using a “gold" dataset of labeled mobile screens. 
+            Then, the teacher classifier is used to generate a “silver" dataset of pseudo-labels by running it on a large, unlabeled data source (e.g., web data). 
+            Finally, the “gold" and “silver" datasets are combined when training a student classifier, which is larger and regularized with noise to improve generalization. 
+            This process can be repeated (however, we only perform one iteration).
+        </p>
+
+        <br aria-hidden="true"/>
+
+        <iframe
+        src="https://biglab-webui-screenclassification.hf.space"
+        frameborder="0"
+        width="1000"
+        height="550"
+    ></iframe>
+
+    </section>
+
+    <section class="app3">
+        <h3 data-exclude-link><span><span class="me-2 material-symbols-rounded"> landscape </span>UI Modeling Use Case 3: Screen Similarity</span></h3>
+        
+        <section class="teaser mt-2">
+            <img src="static/diagram_screen_similarity.png" alt="A short slide animation showing the overivew of WebUI."></image>
+        </section>
+        
+        <p>
+            We used unsupervised domain adaptation (UDA) to train a screen similarity model that predicts relationships between pairs of web pages and mobile app screens. 
+            The training uses web data to learn similarity between screenshots using their associated URLs. Unlabeled data from Rico is used to train an domain-adversarial network, which guides the main model to learn features that transferrable from web pages to mobile screens.
+        </p>
+
+        <br aria-hidden="true"/>
+
+        <iframe
+        src="https://biglab-webui-screensim.hf.space"
+        frameborder="0"
+        width="1000"
+        height="1000"
+    ></iframe>
+
+    </section>
+
+
+
     <section id="citation">
         <h3 data-exclude-link><span><span class="me-1 material-symbols-rounded">quick_reference_all</span>Reference</span>
             <!-- <div>
